@@ -1,0 +1,118 @@
+Netflix End User License Agreement
+
+Last Updated: August 15, 2024
+
+This End User License Agreement ("EULA") is a legal agreement between you and Netflix, Inc. ("Netflix", "we", "us", or "our") for the use of the Netflix software application ("Application").
+
+BY INSTALLING, COPYING, OR OTHERWISE USING THE APPLICATION, YOU AGREE TO BE BOUND BY THE TERMS OF THIS EULA. IF YOU DO NOT AGREE TO THE TERMS OF THIS EULA, DO NOT INSTALL OR USE THE APPLICATION.
+
+1. LICENSE GRANT
+
+Subject to the terms and conditions of this EULA, Netflix grants you a limited, non-exclusive, non-transferable, revocable license to download, install, and use the Application solely for your personal, non-commercial purposes on devices that you own or control.
+
+2. LICENSE RESTRICTIONS
+
+You shall not:
+a) Modify, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Application
+b) Copy the Application, except as expressly permitted by this license
+c) Rent, lease, loan, resell, sublicense, distribute or otherwise transfer the Application to any third party
+d) Use the Application to violate any applicable laws, rules or regulations
+e) Remove, obscure, or alter any proprietary rights notices on the Application
+f) Use the Application in any manner that could damage, disable, overburden, or impair Netflix servers or networks
+g) Attempt to gain unauthorized access to any Netflix services, accounts, or computer systems or networks
+
+3. INTELLECTUAL PROPERTY RIGHTS
+
+The Application and all worldwide copyrights, trade secrets, and other intellectual property rights therein are the exclusive property of Netflix and its licensors. Netflix reserves all rights in and to the Application not expressly granted to you under this EULA.
+
+All Netflix content, including but not limited to movies, TV shows, documentaries, and other video content, as well as all related materials, are protected by copyright, trademark, and other intellectual property laws. You acknowledge that you do not acquire any ownership rights by using the Application or accessing Netflix content.
+
+4. DOWNLOAD AND STREAMING LIMITATIONS
+
+Certain Netflix membership plans allow you to download select Netflix content to supported devices for offline viewing. Any downloaded content:
+a) May only be viewed through the Netflix Application on the device to which it was downloaded
+b) Will expire after a limited period of time, after which you must re-download to continue viewing
+c) Is limited to a specific number of devices at any given time, as determined by your membership plan
+d) May not be transferred to other devices or shared with others
+
+5. PRIVACY AND DATA COLLECTION
+
+Your use of the Application is subject to Netflix's Privacy Policy, which can be found at www.netflix.com/privacy. By using the Application, you consent to the collection, use, and sharing of your information as described in the Privacy Policy.
+
+The Application may collect and transmit:
+- Viewing history and preferences
+- Device information and identifiers
+- Location data
+- Interaction data with the Application
+- Technical and diagnostic information
+
+6. UPDATES AND MODIFICATIONS
+
+Netflix may from time to time develop updates, upgrades, patches, bug fixes, and other modifications to improve the performance of the Application ("Updates"). Updates may be automatically downloaded and installed without providing any additional notice or receiving any additional consent. You consent to such automatic Updates.
+
+Netflix reserves the right to modify or discontinue the Application at any time without notice. You agree that Netflix shall not be liable to you or any third party for any modification, suspension, or discontinuance of the Application.
+
+7. DISCLAIMER OF WARRANTIES
+
+THE APPLICATION IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+NETFLIX DOES NOT WARRANT THAT:
+a) The Application will meet your requirements
+b) The Application will be uninterrupted, timely, secure, or error-free
+c) The results obtained from use of the Application will be accurate or reliable
+d) Any errors in the Application will be corrected
+
+8. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL NETFLIX BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
+a) Your access to or use of or inability to access or use the Application
+b) Any unauthorized access to or use of our servers and/or any personal information stored therein
+c) Any interruption or cessation of transmission to or from the Application
+d) Any bugs, viruses, trojan horses, or the like that may be transmitted to or through the Application
+e) Any errors or omissions in any content or for any loss or damage incurred as a result of the use of any content posted, emailed, transmitted, or otherwise made available through the Application
+
+NETFLIX'S TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATED TO THE APPLICATION SHALL NOT EXCEED THE AMOUNT YOU PAID TO NETFLIX IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR ONE HUNDRED DOLLARS ($100), WHICHEVER IS GREATER.
+
+9. TERMINATION
+
+This EULA is effective until terminated. Your rights under this EULA will terminate automatically without notice from Netflix if you fail to comply with any term(s) of this EULA. Netflix may terminate this EULA at any time without notice.
+
+Upon termination:
+a) All rights granted to you under this EULA shall cease
+b) You must cease all use of the Application
+c) You must delete all copies of the Application from your devices
+d) Any downloaded content will become inaccessible
+
+10. GOVERNING LAW AND DISPUTE RESOLUTION
+
+This EULA shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without giving effect to any principles of conflicts of law.
+
+Any dispute, claim, or controversy arising out of or relating to this EULA shall be resolved through binding arbitration administered by the American Arbitration Association (AAA) in accordance with its Commercial Arbitration Rules. The arbitration shall take place in Los Gatos, California, and judgment on the award rendered by the arbitrator(s) may be entered in any court having jurisdiction.
+
+YOU AGREE THAT ANY DISPUTE RESOLUTION PROCEEDINGS WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, CONSOLIDATED, OR REPRESENTATIVE ACTION.
+
+11. EXPORT RESTRICTIONS
+
+The Application and related technology are subject to U.S. export control laws and may be subject to export or import regulations in other countries. You agree to strictly comply with all such laws and regulations.
+
+12. ENTIRE AGREEMENT
+
+This EULA constitutes the entire agreement between you and Netflix with respect to the Application and supersedes all prior or contemporaneous understandings and agreements, whether written or oral, with respect to the Application.
+
+13. SEVERABILITY
+
+If any provision of this EULA is held to be invalid or unenforceable, such provision shall be struck and the remaining provisions shall be enforced to the fullest extent under law.
+
+14. CONTACT INFORMATION
+
+If you have any questions about this EULA, please contact Netflix at:
+
+Netflix, Inc.
+100 Winchester Circle
+Los Gatos, CA 95032
+United States
+
+Email: support@netflix.com
+Phone: 1-866-579-7172
+
+BY CLICKING "I ACCEPT" OR BY DOWNLOADING, INSTALLING, OR USING THE APPLICATION, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS EULA, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.

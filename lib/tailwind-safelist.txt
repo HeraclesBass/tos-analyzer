@@ -1,0 +1,44 @@
+// This file exists solely to ensure Tailwind JIT generates all dynamic classes
+// DO NOT DELETE - Required for dynamic class generation in components
+
+// TOSCard gradient classes with opacity
+from-critical-500/10 from-critical-500/20 via-critical-600/5 via-critical-600/10
+from-concerning-500/10 from-concerning-500/20 via-concerning-600/5 via-concerning-600/10
+from-safe-500/10 from-safe-500/20 via-safe-600/5 via-safe-600/10
+
+// Group-hover gradient variants
+group-hover:from-critical-500/20 group-hover:via-critical-600/10
+group-hover:from-concerning-500/20 group-hover:via-concerning-600/10
+group-hover:from-safe-500/20 group-hover:via-safe-600/10
+
+// RiskBadge gradients
+from-emerald-500 to-emerald-600 shadow-emerald-500/30
+from-amber-500 to-amber-600 shadow-amber-500/30
+from-red-500 to-red-600 shadow-red-500/30
+from-slate-600 to-slate-700 shadow-slate-600/30
+
+// Border opacity utilities
+border-opacity-30 border-opacity-50 group-hover:border-opacity-50
+
+// Scale transforms
+scale-105 group-hover:scale-105 hover:scale-105
+
+// Border colors  
+border-critical-500 border-critical-400 border-critical-800 border-critical-700
+border-concerning-500 border-concerning-400 border-concerning-800 border-concerning-700
+border-safe-500 border-safe-400 border-safe-800 border-safe-700
+
+// Background colors
+bg-critical-950 bg-critical-900 bg-concerning-950 bg-concerning-900 bg-safe-950 bg-safe-900
+
+// Text colors
+text-critical-400 text-critical-300 text-concerning-400 text-concerning-300 text-safe-400 text-safe-300
+
+// Group-hover variants
+group-hover:border-critical-400 group-hover:border-critical-700
+group-hover:border-concerning-400 group-hover:border-concerning-700
+group-hover:border-safe-400 group-hover:border-safe-700
+group-hover:bg-critical-900 group-hover:bg-concerning-900 group-hover:bg-safe-900
+group-hover:text-critical-400 group-hover:text-critical-300
+group-hover:text-concerning-400 group-hover:text-concerning-300
+group-hover:text-safe-400 group-hover:text-safe-300

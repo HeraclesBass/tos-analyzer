@@ -1,0 +1,102 @@
+Google Terms of Service
+
+Effective October 25, 2024
+
+What's covered in these terms
+
+We know it's tempting to skip these Terms of Service, but it's important to establish what you can expect from us as you use Google services, and what we expect from you.
+
+These Terms of Service reflect the way Google's business works, the laws that apply to our company, and certain things we've always believed to be true. As a result, these Terms of Service help define Google's relationship with you as you interact with our services. For example, these terms include the following topic headings:
+
+Service provider
+
+Google LLC is the provider of these services. Google LLC is a Delaware corporation located at 1600 Amphitheatre Parkway, Mountain View, California 94043, United States.
+
+What you can expect from us
+
+We provide a broad range of useful services. In return, we expect that you:
+
+Follow these terms and service-specific additional terms. You may not use our services in ways that breach these terms or policies that are referenced or linked from these terms.
+
+Respect the legal rights of others. Your use of our services must not infringe anyone's legal rights (like intellectual property rights or privacy rights).
+
+Don't abuse, harm, interfere with, or disrupt the services — for example, by accessing or using them in fraudulent or deceptive ways, introducing malware, or spamming, hacking, or bypassing our systems or protective measures. When we index the web to bring you search results, we respect standard usage restrictions that website owners specify in their websites' code, so we ask the same when you use our services.
+
+Your content in our services
+
+Some of our services give you the opportunity to make your content publicly available — for example, you might post a product or restaurant review that you wrote, or you might upload a blog post that you created.
+
+See the Permission to use your content section for more about your rights in your content, and how your content is used in our services
+
+If you think someone is infringing your intellectual property rights, you can send us notice of the infringement and we'll take appropriate action. For example, we suspend or close the Google Accounts of repeat copyright infringers as described in our Copyright Help Center.
+
+Permission to use your content
+
+Some of our services are designed to let you upload, submit, store, send, receive, or share your content. You have no obligation to provide any content to our services and you're free to choose the content that you want to provide. If you choose to upload or share content, please make sure you have the necessary rights to do so and that the content is lawful.
+
+License
+
+Your content remains yours, which means that you retain any intellectual property rights that you have in your content. For example, you have intellectual property rights in the creative content you make, such as reviews you write. Or you may have the right to share someone else's creative content if they've given you their permission.
+
+We need your permission if your intellectual property rights restrict our use of your content. You provide Google with that permission through this license.
+
+What's covered
+
+This license covers your content if that content is protected by intellectual property rights.
+
+What's not covered
+
+This license doesn't affect your privacy rights — it's only about your intellectual property rights
+This license doesn't cover these types of content:
+- publicly-available factual information that you provide, such as corrections to the address of a local business. That information doesn't require a license because it's considered common knowledge that everyone's free to use.
+- feedback that you offer, such as suggestions to improve our services. Feedback is covered in the Service-related communications section below.
+
+Rights
+
+This license is:
+- worldwide, which means it's valid anywhere in the world
+- non-exclusive, which means you can license your content to others
+- royalty-free, which means there are no fees for this license
+
+Duration
+
+This license lasts for as long as your content is protected by intellectual property rights. If you remove from our services any content that's covered by this license, then our systems will stop making that content publicly available in a reasonable amount of time.
+
+Software in Google services
+
+Some of our services include downloadable software. We give you permission to use that software as part of the services.
+
+The license we give you is:
+- worldwide, which means it's valid anywhere in the world
+- non-exclusive, which means that we can license the software to others
+- royalty-free, which means there are no fees for this license
+- personal, which means it doesn't extend to anyone else
+- non-assignable, which means you're not allowed to assign the license to anyone else
+
+Modifying and terminating our services
+
+We are constantly changing and improving our services. We may add or remove functionalities or features, and we may suspend or stop a service altogether.
+
+You can stop using our services at any time, although we'll be sorry to see you go. Google may also stop providing services to you, or add or create new limits to our services at any time.
+
+We believe that you own your data and preserving your access to such data is important. If we discontinue a service, where reasonably possible, we'll give you reasonable advance notice and a chance to get information out of that service.
+
+Liabilities
+
+The only liabilities we each have are those described in this section. The laws of your country may provide remedies that cannot be excluded by a contract, and nothing in these terms is meant to affect those rights.
+
+For all users
+
+These terms only limit our liabilities as allowed by applicable law. Specifically, these terms don't limit Google's liability for death or personal injury, fraud, fraudulent misrepresentation, gross negligence, or willful misconduct.
+
+Other than the liabilities described above, Google is liable only for its breaches of these terms or applicable service-specific additional terms, subject to applicable law.
+
+About these terms
+
+We may update these terms and service-specific additional terms from time to time to reflect changes in our services or how we do business — for example, when we add new services, features, technologies, pricing, or benefits (or remove old ones), address new threats to security or user experience, or comply with legal requirements. If we materially change these terms or service-specific additional terms, we'll provide you with reasonable advance notice and the opportunity to review the changes, except in urgent situations, such as preventing abuse, responding to legal requirements, or addressing security and operability issues. If you don't agree to the new terms, you should remove your content and stop using the services. You can also end your relationship with us at any time by closing your Google Account.
+
+Settling disputes, governing law, and courts
+
+For information about how to contact Google, please visit our contact page.
+
+California law will govern all disputes arising out of or relating to these terms, service-specific additional terms, or any related services, regardless of conflict of laws rules. These disputes will be resolved exclusively in the federal or state courts of Santa Clara County, California, USA, and you and Google consent to personal jurisdiction in those courts.

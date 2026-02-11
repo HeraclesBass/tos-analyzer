@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  tos-analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tos-analyzer
+    ports:
+      - "8101:8101"
+    environment:
+      - NODE_ENV=production
+      - PORT=8101
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
+      - RATE_LIMIT_PER_MINUTE=${RATE_LIMIT_PER_MINUTE:-10}
+      - ANALYTICS_ENABLED=${ANALYTICS_ENABLED:-true}
+      - SESSION_SALT=${SESSION_SALT}
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8101/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-batch-size: "400"
+        loki-retries: "5"
+        loki-external-labels: "service=tos-analyzer,environment=production,type=api"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: tos-analyzer-postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-hercules}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-hercules_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-batch-size: "400"
+        loki-retries: "5"
+        loki-external-labels: "service=tos-analyzer-postgres,environment=production,type=database"
+
+  redis:
+    image: redis:7-alpine
+    container_name: tos-analyzer-redis
+    volumes:
+      - redis_data:/data
+    restart: always
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-batch-size: "400"
+        loki-retries: "5"
+        loki-external-labels: "service=tos-analyzer-redis,environment=production,type=database"
+
+volumes:
+  postgres_data:
+  redis_data:

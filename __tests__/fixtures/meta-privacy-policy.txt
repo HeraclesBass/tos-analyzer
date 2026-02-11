@@ -1,0 +1,142 @@
+Meta Privacy Policy
+
+Effective Date: September 1, 2024
+
+Meta Platforms, Inc. ("Meta," "we," "us," or "our") provides this Privacy Policy to help you understand how we collect, use, and share your information when you use our products and services.
+
+What is the Meta Privacy Policy and what does it cover?
+
+We at Meta want you to understand what information we collect, and how we use and share it. That's why we encourage you to read our Privacy Policy. This helps you use Meta Products in the way that's right for you.
+
+In the Meta Privacy Policy, we explain how we collect, use, share, retain and transfer information. We also let you know your rights. Each section of the Policy includes helpful examples and simpler language to make our practices easier to understand.
+
+What Products does this Policy cover?
+
+This Policy covers the information we, Meta Platforms, Inc., process to provide Meta Products. Meta Products, which we also call "Products," include:
+
+- Facebook
+- Instagram
+- Messenger
+- Products offered by Meta Platforms Technologies, such as Meta Horizon Worlds or Meta Quest
+- Other Products that link to this Privacy Policy
+
+What information do we collect?
+
+The information we collect and process about you depends on how you use our Products. For example, we collect different information if you sell furniture on Marketplace than if you post a reel on Instagram. When you use our Products, we collect some information about you even if you don't have an account.
+
+Here's the information we collect:
+
+Your activity and information you provide
+On our Products, you can send messages, take photos and videos, buy or sell things and much more. We call all of the things you can do on our Products "activity." We collect your activity across our Products and information you provide, such as:
+
+- Content you create, like posts, comments or audio
+- Content you provide through our camera feature or your camera roll settings, or through our voice-enabled features
+- Messages you send and receive, including their content, subject to applicable law
+- Metadata about content and messages, subject to applicable law
+- Types of content you view or interact with, and how you interact with it
+- Apps and features you use, and what actions you take in them
+- Purchases or other transactions you make, including truncated credit card information
+- Hashtags you use
+- The time, frequency and duration of your activities on our Products
+
+Friends, followers and other connections
+
+Information and content others provide about you
+We also collect and receive information and content that other people provide when they use our Products. This can include information about you, such as when they share a photo of you, send a message to you or upload, sync or import your contact information.
+
+App, browser and device information
+We collect and receive information from and about the different devices you use and how you use them.
+
+Device information we collect and receive includes:
+- The device and software you're using, and other device characteristics
+- What you're doing on your device (like whether our app is in the foreground or if your mouse is moving)
+- Identifiers that tell your device apart from other users', including Family Device IDs
+- Device signals like GPS location, Bluetooth signals, and information about nearby WiFi access points and cell towers
+- Information from device settings like access to your GPS location, camera or photos
+- Network and connections like your mobile operator or ISP, language, time zone, mobile phone number, IP address, connection speed, and in some cases, information about other devices that are nearby or on your network
+- Cookie data and similar technologies
+
+How do we use your information?
+
+We use information we collect to provide a personalized experience to you, including ads, along with the other purposes we explain in detail below.
+
+For some of these purposes, we use information across our Products and across your devices. The information we use for these purposes is automatically processed by our systems. But in some cases, we also use manual review to access and review your information.
+
+To use less information that's connected to individual users, in some cases we de-identify or aggregate information. We might also anonymize it so that it no longer identifies you. We use this information in the same ways we use your information as described in this section.
+
+Here are the ways we use your information:
+
+To personalize our Products
+
+We use information we have to provide and improve our Products. This includes personalizing features, content and recommendations, such as your Facebook Feed, Instagram Feed and Stories. We use information about the connections you make, the choices and settings you select, and what you share and do on and off our Products, to personalize your experience.
+
+Provide and improve our Products
+
+We're constantly working to make our Products better and create new ones with the features you care about the most. Information we collect from you helps us learn how.
+
+We use information we collect to:
+- Verify your identity and that you're eligible to use our Products
+- Provide, personalize and improve our Products, including for feed ranking and other experiences
+- Connect you with people and organizations you care about
+- Empower you to use our Products to connect, communicate, find communities and discover content you're interested in
+- Help you share content, such as text, photos and videos
+- Help us suggest content relevant to you
+- Help you discover content, products and services that may interest you
+
+Promote safety, security and integrity
+
+Here's how we promote safety, security and integrity. We work to verify accounts and activity, and promote safety and security on and off our Products, such as by investigating suspicious activity or violations of our terms and policies, and to ensure our Products are being used legally.
+
+Communicate with you
+
+We communicate with you using information you've given us, like contact information you've entered on your profile.
+
+How do we share your information with partners, vendors, service providers and third parties?
+
+We don't sell any of your information to anyone and we never will. We also require partners and third parties to follow rules about how they can and cannot use and disclose the information we provide.
+
+Here are the types of third parties we can share information with about you:
+
+Partners
+Advertisers and Measurement Partners
+
+We provide advertisers with reports about the kinds of people who are seeing their ads and how their ads are performing. To do this, we share information about you such as:
+- Whether you saw or interacted with an ad
+- Information about the device you're using
+- Information we have about you depending on whether the advertiser is using our tools for advertisers
+
+Business tools partners
+
+Vendors and service providers
+
+We provide information and content to vendors and service providers who support our business, such as by providing technical infrastructure services, analyzing how our Products are used, providing customer service, facilitating payments or conducting surveys.
+
+Training our AI at Meta
+
+We want to make sure our AI can understand, respond to and be useful for everyone in all the places where people use Meta Products. To do this, we use your information to train, test and improve our AI, subject to the choices and controls you have.
+
+This can include information about you from across our Products and information we receive from our partners, such as the Ray-Ban Meta Smart Glasses.
+
+We use this information to:
+- Train AI models that power Meta AI and AI features on our Products
+- Improve AI accuracy and performance
+- Develop new AI capabilities and features
+- Test and evaluate AI models
+
+Your content may be used to train our AI in certain circumstances. This includes public posts, comments, photos and videos across Facebook and Instagram.
+
+If you share content through messages, we do not train our AI on that content except in certain safety and security circumstances.
+
+You have the right to object to your information being used to improve our AI under applicable law. To object, you can use our form on the Facebook and Instagram Help Centers. If you object, we will stop using your information for this purpose going forward, but this won't affect any AI models that were trained before we received and processed your objection. You may have the right to request deletion of AI outputs that reference you by using the Help Centers.
+
+How can you exercise your rights?
+
+We provide you with the ability to access, rectify, port and erase your data. Learn more in the Facebook Settings and Instagram Settings.
+
+You also have the right to object to and restrict certain processing of your data. This includes the right to object to us processing your data for direct marketing, and the right to object to our processing of your data where we're performing a task in the public interest or pursuing our legitimate interests or those of a third party.
+
+Data retention, account deactivation and deletion
+
+We keep information as long as we need it to provide our Products, comply with legal obligations or protect our or other's interests. We decide how long we need information on a case-by-case basis.
+
+When you delete your account, we delete things you have posted, such as your photos and status updates, and you won't be able to recover that information later. Information that others have shared about you isn't part of your account and won't be deleted.

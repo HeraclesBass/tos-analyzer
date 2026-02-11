@@ -1,0 +1,128 @@
+// Prisma schema for TOS Analyzer
+// Database: PostgreSQL (Hercules shared instance)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Main TOS Analysis Results Table
+model Analysis {
+  id            String   @id @default(uuid())
+  contentHash   String   @unique @map("content_hash") // SHA-256 hash of normalized content
+  sourceType    SourceType @map("source_type") // paste, upload, url
+  sourceUrl     String?  @map("source_url") // Original URL if applicable
+  
+  // Analysis Results (JSON stored as JSONB)
+  analysisData  Json     @map("analysis_data") // Complete Claude response
+  
+  // Metadata
+  wordCount     Int      @map("word_count")
+  charCount     Int      @map("char_count")
+  
+  // Public Library Fields
+  companyName      String?  @map("company_name") // Optional company name for public display
+  isPublic         Boolean  @default(false) @map("is_public") // Whether analysis is in public library
+  popularityScore  Int      @default(0) @map("popularity_score") // Calculated from views + shares
+  
+  // Timestamps
+  createdAt     DateTime @default(now()) @map("created_at")
+  expiresAt     DateTime @map("expires_at") // 30 days from creation
+  
+  // Relations
+  shares        Share[]
+  analytics     AnalyticsEvent[]
+  
+  @@index([contentHash])
+  @@index([createdAt])
+  @@index([expiresAt])
+  @@index([isPublic])
+  @@index([isPublic, popularityScore])
+  @@map("analyses")
+}
+
+// Shareable Links Table
+model Share {
+  id            String   @id @default(uuid())
+  analysisId    String   @map("analysis_id")
+  
+  // Share metadata
+  sessionHash   String?  @map("session_hash") // Hashed session identifier
+  createdAt     DateTime @default(now()) @map("created_at")
+  expiresAt     DateTime @map("expires_at") // 30 days from creation
+  viewCount     Int      @default(0) @map("view_count")
+  
+  // Relations
+  analysis      Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  
+  @@index([analysisId])
+  @@index([sessionHash])
+  @@index([createdAt])
+  @@map("shares")
+}
+
+// Analytics Events Table (No PII)
+model AnalyticsEvent {
+  id            String   @id @default(uuid())
+  analysisId    String?  @map("analysis_id") // Nullable for aggregate events
+  
+  eventType     EventType @map("event_type")
+  sessionHash   String?  @map("session_hash") // Hashed session identifier
+  
+  // Event metadata (stored as JSONB)
+  metadata      Json?
+  
+  // Timestamps
+  timestamp     DateTime @default(now())
+  
+  // Relations
+  analysis      Analysis? @relation(fields: [analysisId], references: [id], onDelete: SetNull)
+  
+  @@index([eventType])
+  @@index([timestamp])
+  @@index([sessionHash])
+  @@map("analytics_events")
+}
+
+// Daily Analytics Summaries (Aggregated data)
+model DailySummary {
+  id                String   @id @default(uuid())
+  date              DateTime @unique @db.Date
+  
+  // Aggregated counts
+  totalAnalyses     Int      @default(0) @map("total_analyses")
+  totalShares       Int      @default(0) @map("total_shares")
+  totalViews        Int      @default(0) @map("total_views")
+  uniqueSessions    Int      @default(0) @map("unique_sessions")
+  
+  // Source type breakdown (stored as JSONB)
+  sourceBreakdown   Json?    @map("source_breakdown")
+  
+  // Timestamps
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+  
+  @@index([date])
+  @@map("daily_summaries")
+}
+
+// Enums
+enum SourceType {
+  paste
+  upload
+  url
+}
+
+enum EventType {
+  analysis_created
+  analysis_viewed
+  share_created
+  share_viewed
+  pdf_exported
+  published_to_library
+  error_occurred
+}
