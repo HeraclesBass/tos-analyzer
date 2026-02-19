@@ -7,14 +7,14 @@ services:
       dockerfile: Dockerfile
     container_name: tos-analyzer
     ports:
-      - "8101:8101"
+      - "127.0.0.1:8101:8101"
     environment:
       - NODE_ENV=production
       - PORT=8101
       - DATABASE_URL=${DATABASE_URL}
       - REDIS_URL=${REDIS_URL}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DAILY_TOKEN_BUDGET=${DAILY_TOKEN_BUDGET:-5000000}
       - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
       - RATE_LIMIT_PER_MINUTE=${RATE_LIMIT_PER_MINUTE:-10}
       - ANALYTICS_ENABLED=${ANALYTICS_ENABLED:-true}

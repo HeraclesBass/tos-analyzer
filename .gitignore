@@ -32,19 +32,8 @@ Thumbs.db
 # Prisma
 prisma/*.db
 
-# Internal docs (not for public repo)
-AI_INTEGRATION_STRATEGY.md
-DATABASE_SCHEMA.md
-DEPLOYMENT_SUMMARY.md
-DESIGN_SPEC.md
-FRONTEND_IMPLEMENTATION_SUMMARY.md
-IMPLEMENTATION_NOTES.md
-PROJECT_PLAN.md
-PROJECT_SUMMARY.md
-DEV_SETUP.md
-ROOT_SETUP_GUIDE.md
-TAILWIND_DYNAMIC_CLASSES.md
-TESTING.md
+# Internal docs and archived files
+.archive/
 CLAUDE.md
 
 # Logs

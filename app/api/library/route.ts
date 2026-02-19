@@ -13,7 +13,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { formatError } from '@/lib/utils';
+import { checkReadRateLimit } from '@/lib/redis';
+import { formatError, getClientIP } from '@/lib/utils';
 
 // Query parameters validation schema
 const LibraryQuerySchema = z.object({
@@ -76,6 +77,15 @@ function getRiskScore(risk: string): number {
 
 export async function GET(request: NextRequest) {
   try {
+    // Rate limit read endpoints (30/min per IP)
+    const clientIP = getClientIP(request.headers);
+    if (await checkReadRateLimit(clientIP)) {
+      return NextResponse.json(
+        formatError('Rate limit exceeded. Please try again later.', 'RATE_LIMIT_EXCEEDED'),
+        { status: 429 }
+      );
+    }
+
     // Parse and validate query parameters
     const { searchParams } = new URL(request.url);
     const queryParams = {
@@ -113,10 +123,26 @@ export async function GET(request: NextRequest) {
       };
     }
 
-    // Fetch all matching analyses
-    // Note: We fetch all because risk filtering and category filtering require JSON parsing
+    // Push sort to DB when possible; risk sorts require in-memory JSON parsing
+    const needsInMemorySort = sort === 'risk-high' || sort === 'risk-low';
+    const needsInMemoryFilter = !!category || filter !== 'all';
+
+    const orderBy: any = (() => {
+      switch (sort) {
+        case 'popular': return { popularityScore: 'desc' as const };
+        case 'recent':  return { createdAt: 'desc' as const };
+        default:        return { popularityScore: 'desc' as const };
+      }
+    })();
+
+    // Cap DB fetch: use exact limit when no in-memory filtering needed,
+    // otherwise fetch up to 500 rows to allow filtering headroom
+    const fetchLimit = (needsInMemorySort || needsInMemoryFilter) ? 500 : limit;
+
     let analyses = await prisma.analysis.findMany({
       where,
+      orderBy,
+      take: fetchLimit,
       include: {
         shares: {
           select: {
@@ -168,21 +194,14 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Apply sorting
-    filteredAnalyses.sort((a, b) => {
-      switch (sort) {
-        case 'popular':
-          return b.popularityScore - a.popularityScore;
-        case 'recent':
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        case 'risk-high':
-          return getRiskScore(b.overallRisk) - getRiskScore(a.overallRisk);
-        case 'risk-low':
-          return getRiskScore(a.overallRisk) - getRiskScore(b.overallRisk);
-        default:
-          return 0;
-      }
-    });
+    // Only sort in memory for risk sorts (popular/recent already sorted by DB)
+    if (needsInMemorySort) {
+      filteredAnalyses.sort((a, b) => {
+        if (sort === 'risk-high') return getRiskScore(b.overallRisk) - getRiskScore(a.overallRisk);
+        if (sort === 'risk-low')  return getRiskScore(a.overallRisk) - getRiskScore(b.overallRisk);
+        return 0;
+      });
+    }
 
     // Apply pagination
     const paginatedAnalyses = filteredAnalyses.slice(0, limit);

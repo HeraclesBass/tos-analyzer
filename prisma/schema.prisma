@@ -28,6 +28,9 @@ model Analysis {
   companyName      String?  @map("company_name") // Optional company name for public display
   isPublic         Boolean  @default(false) @map("is_public") // Whether analysis is in public library
   popularityScore  Int      @default(0) @map("popularity_score") // Calculated from views + shares
+
+  // Ownership — HMAC hash of creator_token, used to authorize publish/modify
+  creatorTokenHash String?  @map("creator_token_hash")
   
   // Timestamps
   createdAt     DateTime @default(now()) @map("created_at")

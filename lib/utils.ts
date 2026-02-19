@@ -163,18 +163,35 @@ export function sanitizeFilename(filename: string): string {
 }
 
 /**
+ * Sanitize a company name for safe storage and display.
+ * Strips HTML tags, allows only characters legitimate in company names.
+ */
+export function sanitizeCompanyName(name: string): string {
+  return name
+    .replace(/<[^>]*>/g, '')                           // Strip HTML tags
+    .replace(/[^a-zA-Z0-9\s.,&'()\-+@!]/g, '')       // Allow safe chars only
+    .trim()
+    .substring(0, 200);
+}
+
+/**
  * Get client IP from request headers
+ * Uses X-Real-IP (set by nginx) as primary — cannot be spoofed by clients.
+ * Falls back to LAST entry in X-Forwarded-For (appended by trusted nginx proxy).
+ * NEVER use the FIRST X-Forwarded-For entry — it's client-controlled and spoofable.
  */
 export function getClientIP(headers: Headers): string {
-  // Check various headers for IP (reverse proxy aware)
-  const forwarded = headers.get('x-forwarded-for');
-  if (forwarded) {
-    return forwarded.split(',')[0].trim();
-  }
-
+  // Prefer X-Real-IP — set by nginx from $remote_addr, not spoofable
   const realIP = headers.get('x-real-ip');
   if (realIP) {
-    return realIP;
+    return realIP.trim();
+  }
+
+  // Fallback: use LAST X-Forwarded-For entry (added by our trusted nginx)
+  const forwarded = headers.get('x-forwarded-for');
+  if (forwarded) {
+    const parts = forwarded.split(',').map(s => s.trim());
+    return parts[parts.length - 1];
   }
 
   return 'unknown';

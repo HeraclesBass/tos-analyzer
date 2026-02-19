@@ -37,7 +37,10 @@ export const CACHE_KEYS = {
   ANALYSIS: 'tos:analysis:',
   SHARE: 'tos:share:',
   RATE_LIMIT: 'ratelimit:ip:',
+  RATE_LIMIT_READ: 'ratelimit:read:ip:',
   SESSION: 'session:',
+  DAILY_TOKENS: 'budget:daily_tokens:',
+  DAILY_REQUESTS: 'budget:daily_requests:',
 };
 
 // Cache TTLs (in seconds)
@@ -101,23 +104,102 @@ export async function cacheShare(shareId: string, data: any): Promise<void> {
 }
 
 /**
+ * Atomic rate limit using Lua script.
+ * INCR and EXPIRE execute as a single atomic operation — no race condition
+ * where two concurrent requests both see count=1 and one fails to set TTL.
+ */
+async function atomicRateLimit(key: string, windowSeconds: number): Promise<number> {
+  const script = `
+    local count = redis.call('INCR', KEYS[1])
+    if count == 1 then
+      redis.call('EXPIRE', KEYS[1], ARGV[1])
+    end
+    return count
+  `;
+  const result = await redis.eval(script, 1, key, windowSeconds.toString());
+  return result as number;
+}
+
+/**
  * Check rate limit for IP address
  * Returns true if rate limit exceeded
+ * FAIL-CLOSED: if Redis is down, requests are blocked (not allowed)
  */
 export async function checkRateLimit(ip: string, limit: number = 10): Promise<boolean> {
   try {
     const key = `${CACHE_KEYS.RATE_LIMIT}${ip}`;
-    const count = await redis.incr(key);
-    
-    if (count === 1) {
-      // First request, set expiry
-      await redis.expire(key, CACHE_TTL.RATE_LIMIT);
-    }
-    
+    const count = await atomicRateLimit(key, CACHE_TTL.RATE_LIMIT);
     return count > limit;
   } catch (error) {
     console.error('Redis rate limit error:', error);
-    return false; // Fail open on Redis errors
+    return true; // FAIL CLOSED — block requests when Redis is down
+  }
+}
+
+/**
+ * Lighter rate limit for read-only endpoints (library, export, view)
+ * Higher limit (30/min) but still prevents scraping
+ */
+export async function checkReadRateLimit(ip: string, limit: number = 30): Promise<boolean> {
+  try {
+    const key = `${CACHE_KEYS.RATE_LIMIT_READ}${ip}`;
+    const count = await atomicRateLimit(key, CACHE_TTL.RATE_LIMIT);
+    return count > limit;
+  } catch (error) {
+    console.error('Redis read rate limit error:', error);
+    return true; // FAIL CLOSED
+  }
+}
+
+/**
+ * Daily token budget tracking
+ * Tracks total Gemini API tokens consumed today
+ * Returns true if budget is EXCEEDED
+ */
+export async function checkDailyBudget(tokensToAdd: number = 0): Promise<{ exceeded: boolean; used: number; limit: number }> {
+  const limit = parseInt(process.env.DAILY_TOKEN_BUDGET || '5000000'); // 5M tokens/day default
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const tokenKey = `${CACHE_KEYS.DAILY_TOKENS}${today}`;
+  const requestKey = `${CACHE_KEYS.DAILY_REQUESTS}${today}`;
+
+  try {
+    let used = 0;
+    if (tokensToAdd > 0) {
+      used = await redis.incrby(tokenKey, tokensToAdd);
+      await redis.incr(requestKey);
+      // Set TTL to expire at end of day (max 48h to be safe)
+      await redis.expire(tokenKey, 48 * 60 * 60);
+      await redis.expire(requestKey, 48 * 60 * 60);
+    } else {
+      const current = await redis.get(tokenKey);
+      used = current ? parseInt(current, 10) : 0;
+    }
+    return { exceeded: used > limit, used, limit };
+  } catch (error) {
+    console.error('Redis budget check error:', error);
+    // FAIL CLOSED on budget check too — don't allow unbounded spend
+    return { exceeded: true, used: 0, limit };
+  }
+}
+
+/**
+ * Get daily usage stats
+ */
+export async function getDailyUsageStats(): Promise<{ tokens: number; requests: number; budget: number }> {
+  const today = new Date().toISOString().split('T')[0];
+  const budget = parseInt(process.env.DAILY_TOKEN_BUDGET || '5000000');
+  try {
+    const [tokens, requests] = await Promise.all([
+      redis.get(`${CACHE_KEYS.DAILY_TOKENS}${today}`),
+      redis.get(`${CACHE_KEYS.DAILY_REQUESTS}${today}`),
+    ]);
+    return {
+      tokens: tokens ? parseInt(tokens, 10) : 0,
+      requests: requests ? parseInt(requests, 10) : 0,
+      budget,
+    };
+  } catch {
+    return { tokens: 0, requests: 0, budget };
   }
 }
 

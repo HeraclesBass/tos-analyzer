@@ -16,8 +16,9 @@ export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { checkRateLimit, getRateLimitInfo } from '@/lib/redis';
+import { checkRateLimit, getRateLimitInfo, checkDailyBudget } from '@/lib/redis';
 import { geminiAnalyzer } from '@/lib/services/gemini-analyzer';
+import crypto from 'crypto';
 import {
   validateTOSText,
   hashContent,
@@ -27,6 +28,7 @@ import {
   getClientIP,
   formatError,
   generateSessionHash,
+  sanitizeCompanyName,
 } from '@/lib/utils';
 
 // Request validation schema
@@ -70,7 +72,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { text, source_type, source_url, skip_cache, company_name, add_to_library } = validationResult.data;
+    const { text, source_type, source_url, company_name, add_to_library } = validationResult.data;
+    // skip_cache is always false for anonymous users — prevents API cost abuse
+    const skip_cache = false;
+
+    // Check daily budget before proceeding
+    const budget = await checkDailyBudget();
+    if (budget.exceeded) {
+      return NextResponse.json(
+        formatError('Daily analysis limit reached. Please try again tomorrow.', 'BUDGET_EXCEEDED'),
+        { status: 503, headers: rateLimitHeaders }
+      );
+    }
 
     // Additional text validation
     const textError = validateTOSText(text);
@@ -85,6 +98,13 @@ export async function POST(request: NextRequest) {
     const contentHash = hashContent(text);
     const wordCount = countWords(text);
     const charCount = countChars(text);
+
+    // Generate creator token for ownership verification on publish
+    const creatorToken = crypto.randomBytes(32).toString('hex');
+    const creatorTokenHash = crypto
+      .createHmac('sha256', process.env.SESSION_SALT || 'tos-analyzer-salt')
+      .update(creatorToken)
+      .digest('hex');
 
     // Check if analysis already exists in database
     let existingAnalysis = await prisma.analysis.findUnique({
@@ -135,6 +155,11 @@ export async function POST(request: NextRequest) {
     console.log('Analyzing TOS with Gemini...');
     const { result, cached, tokensUsed } = await geminiAnalyzer.analyze(text, skip_cache);
 
+    // Track token usage against daily budget
+    if (tokensUsed && tokensUsed > 0 && !cached) {
+      await checkDailyBudget(tokensUsed);
+    }
+
     // Validate document is actually a legal document
     if (!result.document_validation.is_legal_document) {
       return NextResponse.json({
@@ -150,6 +175,10 @@ export async function POST(request: NextRequest) {
     // Store or update in database
     const expiresAt = calculateExpiryDate(30);
     
+    const safeName = sanitizeCompanyName(
+      company_name || result.detected_company.name || 'Unknown Company'
+    );
+
     if (existingAnalysis) {
       // Update existing
       existingAnalysis = await prisma.analysis.update({
@@ -159,8 +188,8 @@ export async function POST(request: NextRequest) {
           expiresAt,
           wordCount,
           charCount,
-          companyName: company_name || result.detected_company.name || 'Unknown Company',
-          isPublic: add_to_library !== undefined ? add_to_library : true,
+          companyName: safeName,
+          isPublic: add_to_library,
         },
       });
     } else {
@@ -174,9 +203,10 @@ export async function POST(request: NextRequest) {
           wordCount,
           charCount,
           expiresAt,
-          companyName: company_name || result.detected_company.name || 'Unknown Company',
-          isPublic: add_to_library !== undefined ? add_to_library : true,
+          companyName: safeName,
+          isPublic: add_to_library,
           popularityScore: 0,
+          creatorTokenHash,
         },
       });
     }
@@ -208,7 +238,7 @@ export async function POST(request: NextRequest) {
         id: existingAnalysis.id,
         analysis: result,
         cached,
-        tokens_used: tokensUsed,
+        creator_token: creatorToken,
         created_at: existingAnalysis.createdAt,
         expires_at: existingAnalysis.expiresAt,
         is_public: existingAnalysis.isPublic,

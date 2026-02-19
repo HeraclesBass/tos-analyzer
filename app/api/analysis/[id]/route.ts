@@ -8,7 +8,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getCachedShare, cacheShare } from '@/lib/redis';
+import { getCachedShare, cacheShare, checkReadRateLimit } from '@/lib/redis';
 import { formatError, generateSessionHash, getClientIP, calculatePopularityScore } from '@/lib/utils';
 
 export async function GET(
@@ -16,6 +16,15 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Rate limit read endpoints (30/min per IP)
+    const clientIP = getClientIP(request.headers);
+    if (await checkReadRateLimit(clientIP)) {
+      return NextResponse.json(
+        formatError('Rate limit exceeded. Please try again later.', 'RATE_LIMIT_EXCEEDED'),
+        { status: 429 }
+      );
+    }
+
     const { id } = params;
 
     // Validate UUID format
@@ -65,7 +74,6 @@ export async function GET(
     }
 
     // Create or update share record
-    const clientIP = getClientIP(request.headers);
     const userAgent = request.headers.get('user-agent') || 'unknown';
     const sessionHash = generateSessionHash(clientIP, userAgent);
 

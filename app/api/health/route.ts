@@ -12,7 +12,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { checkRedisHealth } from '@/lib/redis';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function GET() {
   const checks: Record<string, boolean> = {
@@ -32,17 +31,9 @@ export async function GET() {
   // Check Redis
   checks.redis = await checkRedisHealth();
 
-  // Check Gemini API (lightweight — list models)
-  try {
-    if (process.env.GEMINI_API_KEY) {
-      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-pro' });
-      await model.countTokens('health check');
-      checks.gemini = true;
-    }
-  } catch (error) {
-    console.error('Gemini health check failed:', error);
-  }
+  // Check Gemini API — only verify key is configured, don't make API calls
+  // (Docker healthcheck runs every 30s — calling Gemini wastes tokens)
+  checks.gemini = !!process.env.GEMINI_API_KEY;
 
   const ok = checks.database && checks.redis;
 
